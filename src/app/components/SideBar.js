@@ -6,11 +6,9 @@ import { useState } from "react";
 
 export default function SideBar() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = [
-    { name: "Overview", path: "/" },
-  ];
+  const navItems = [{ name: "Overview", path: "/" }];
 
   return (
     <>
@@ -57,19 +55,20 @@ export default function SideBar() {
       <aside
         className={`fixed lg:relative transform lg:transform-none transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 top-0 left-0 w-64 bg-white shadow-md h-full z-50 lg:w-1/5 lg:min-h-screen p-6`}
+        } lg:translate-x-0 top-0 left-0 w-64 bg-gray-50 shadow-xl h-full z-50 lg:w-1/5 lg:min-h-screen p-6`}
       >
-        <div className="text-2xl font-bold text-black mb-10">Capstone</div>
-        <nav className="">
+        <div className="text-2xl font-bold text-gray-800 mb-10">Capstone</div>
+
+        <nav>
           <ul className="space-y-6">
             {navItems.map((item) => (
               <li key={item.name}>
                 <Link href={item.path}>
                   <div
-                    className={`flex items-center space-x-3 cursor-pointer text-lg p-4 rounded-l-full transition-colors ${
+                    className={`flex items-center space-x-3 cursor-pointer text-lg p-4 rounded-lg transition-all duration-300 ease-in-out ${
                       pathname === item.path
-                        ? "bg-blue-100 text-blue-600 font-bold"
-                        : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
+                        ? "bg-blue-500 text-white shadow-lg"
+                        : "text-gray-600 hover:bg-gray-100 hover:text-blue-500"
                     }`}
                   >
                     {/* Heroicons SVG for the Sidebar Icon */}
