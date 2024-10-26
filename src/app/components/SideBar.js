@@ -55,7 +55,7 @@ export default function SideBar() {
       <aside
         className={`fixed lg:relative transform lg:transform-none transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 top-0 left-0 w-64 bg-gray-50 shadow-xl h-full z-50 lg:w-1/5 lg:min-h-screen p-6`}
+        } lg:translate-x-0 top-0 left-0 w-48 bg-gray-50 shadow-xl h-full z-50 lg:w-1/6 lg:min-h-screen p-4`}
       >
         <div className="text-2xl font-bold text-gray-800 mb-10">Capstone</div>
 
