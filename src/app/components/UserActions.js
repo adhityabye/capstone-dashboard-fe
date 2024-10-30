@@ -1,8 +1,10 @@
-"use client";
+"use client"; // Ensure this component is marked as client-side
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter hook
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export default function UserActions() {
+  const router = useRouter(); // Initialize router instance
   const [userCount, setUserCount] = useState(0);
 
   useEffect(() => {
@@ -12,8 +14,7 @@ export default function UserActions() {
           "https://capstone-dashboard-be.vercel.app/api/users"
         );
         const data = await response.json();
-        console.log("Error Lur");
-        setUserCount(data.length); 
+        setUserCount(data.length);
       } catch (error) {
         console.error("Error fetching user count:", error);
       }
@@ -21,6 +22,10 @@ export default function UserActions() {
 
     fetchUsers();
   }, []);
+
+  const handleAddUser = () => {
+    router.push("/users/add"); // Navigate to the Add User page
+  };
 
   return (
     <div className="mb-10 bg-white p-6 rounded-xl shadow-md">
@@ -31,7 +36,10 @@ export default function UserActions() {
         </div>
 
         <div className="flex flex-wrap items-center space-x-4 mt-4 lg:mt-0">
-          <button className="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300 ease-in-out">
+          <button
+            onClick={handleAddUser}
+            className="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300 ease-in-out"
+          >
             Add user +
           </button>
 
