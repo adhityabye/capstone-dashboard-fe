@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
+import "react-toastify/dist/ReactToastify.css";
+import { ChevronUpDownIcon } from "@heroicons/react/24/outline"; // Import Chevron Up Down Icon
 
 export default function UserTable() {
   const router = useRouter();
@@ -11,6 +12,7 @@ export default function UserTable() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isNavigating, setIsNavigating] = useState(false);
+  const [sortConfig, setSortConfig] = useState({ key: "", direction: "" });
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -48,46 +50,57 @@ export default function UserTable() {
 
       setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
 
-      // Show Toast Notification
       toast.success("User deleted successfully!", {
         position: "top-right",
         autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
       });
     } catch (error) {
       console.error(error);
       toast.error("Failed to delete user", {
         position: "top-right",
         autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
       });
     }
+  };
+
+  const handleSort = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+
+    const sortedUsers = [...users].sort((a, b) => {
+      if (a[key] < b[key]) return direction === "ascending" ? -1 : 1;
+      if (a[key] > b[key]) return direction === "ascending" ? 1 : -1;
+      return 0;
+    });
+
+    setUsers(sortedUsers);
   };
 
   if (error) return <p>{error}</p>;
 
   return (
     <div className="relative">
-      <ToastContainer /> {/* Toastify Container */}
+      <ToastContainer />
       <div className={`transition-all ${isNavigating ? "blur-sm" : ""}`}>
         <div className="bg-white shadow-lg rounded-lg overflow-hidden my-6">
           <table className="min-w-full table-auto">
             <thead>
               <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                <th className="py-3 px-6 text-left">Name</th>
-                <th className="py-3 px-6 text-left">Email</th>
-                <th className="py-3 px-6 text-left">Address</th>
-                <th className="py-3 px-6 text-left">Age</th>
+                {["name", "email", "address", "age"].map((key) => (
+                  <th
+                    key={key}
+                    className="py-3 px-6 text-left cursor-pointer"
+                    onClick={() => handleSort(key)}
+                  >
+                    <div className="flex items-center">
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                      <ChevronUpDownIcon className="w-4 h-4 ml-1 opacity-70" />
+                    </div>
+                  </th>
+                ))}
                 <th className="py-3 px-6 text-center">Actions</th>
               </tr>
             </thead>

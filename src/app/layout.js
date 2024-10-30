@@ -1,5 +1,6 @@
 import { Inter, Josefin_Sans } from "next/font/google";
 import "./globals.css";
+import LayoutWrapper from "./components/LayoutWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,7 +26,7 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body className={`${inter.variable} ${josefin.variable}`}>
-        {children}
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );
