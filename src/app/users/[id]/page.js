@@ -87,7 +87,7 @@ export default function EditUser() {
               name="name"
               value={userData.name}
               onChange={handleChange}
-              className="w-full border border-gray-300 p-3 rounded-md text-sm"
+              className="w-full text-gray-600 border border-gray-300 p-3 rounded-md text-sm"
               placeholder="Full Name"
             />
           </div>
@@ -101,7 +101,7 @@ export default function EditUser() {
               name="email"
               value={userData.email}
               onChange={handleChange}
-              className="w-full border border-gray-300 p-3 rounded-md text-sm"
+              className="w-full text-gray-600 border border-gray-300 p-3 rounded-md text-sm"
               placeholder="Email Address"
             />
           </div>
@@ -115,7 +115,7 @@ export default function EditUser() {
               name="address"
               value={userData.address}
               onChange={handleChange}
-              className="w-full border border-gray-300 p-3 rounded-md text-sm"
+              className="w-full text-gray-600 border border-gray-300 p-3 rounded-md text-sm"
               placeholder="Address"
             />
           </div>
@@ -129,7 +129,7 @@ export default function EditUser() {
               name="age"
               value={userData.age}
               onChange={handleChange}
-              className="w-full border border-gray-300 p-3 rounded-md text-sm"
+              className="w-full text-gray-600 border border-gray-300 p-3 rounded-md text-sm"
               placeholder="Age"
             />
           </div>

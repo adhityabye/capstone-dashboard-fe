@@ -8,23 +8,31 @@ export default function UserActions() {
   const [userCount, setUserCount] = useState(0);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchOngoingUsers = async () => {
       try {
         const response = await fetch(
-          "https://capstone-dashboard-be.vercel.app/api/users"
+          "https://capstone-dashboard-be.vercel.app/api/billings"
         );
         const data = await response.json();
-        setUserCount(data.length);
+
+        // Filter billings with 'ongoing' status
+        const ongoingUsers = data
+          .filter((billing) => billing.status === "ongoing")
+          .map((billing) => billing.user_id);
+
+        // Count unique users by filtering out duplicate user IDs
+        const uniqueUserCount = new Set(ongoingUsers).size;
+        setUserCount(uniqueUserCount);
       } catch (error) {
-        console.error("Error fetching user count:", error);
+        console.error("Error fetching ongoing users count:", error);
       }
     };
 
-    fetchUsers();
+    fetchOngoingUsers();
   }, []);
 
   const handleAddUser = () => {
-    router.push("/users/add"); // Navigate to the Add User page
+    router.push("/users/add"); 
   };
 
   return (
