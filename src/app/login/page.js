@@ -27,10 +27,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100">
-      <div className="w-full max-w-md px-8 py-10 bg-white rounded-2xl shadow-xl transition-all duration-300 ease-in-out hover:shadow-2xl">
+    <div className="flex items-center justify-center h-full bg-gradient-to-br from-blue-100 to-purple-100">
+      <div className="w-full max-w-md px-8 py-10 bg-white rounded-2xl shadow-xl transition-all duration-300 ease-in-out hover:shadow-2xl max-h-full">
         <h3 className="text-3xl font-bold text-center text-gray-800 mb-8">
-          Welcome Back
+          Capstone Dashboard B_05
         </h3>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
