@@ -1,6 +1,7 @@
 import { Inter, Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "./components/LayoutWrapper";
+import { AuthProvider } from "@/context/authContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,15 +19,16 @@ const josefin = Josefin_Sans({
 
 export const metadata = {
   title: "Capstone",
-  description:
-    "Capstone is a dashboard template for your next project. It is a modern, responsive, and customizable template.",
+  description: "Capstone is a dashboard template for your next project.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html>
+    <html lang="en">
       <body className={`${inter.variable} ${josefin.variable}`}>
-        <LayoutWrapper>{children}</LayoutWrapper>
+        <AuthProvider>
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </AuthProvider>
       </body>
     </html>
   );
