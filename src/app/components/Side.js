@@ -17,7 +17,7 @@ export default function Sidebar() {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="block lg:hidden p-4 text-gray-500 focus:outline-none"
+        className="fixed top-4 left-4 z-50 lg:hidden p-2 bg-white rounded-md shadow-md text-gray-500 focus:outline-none"
       >
         {isOpen ? (
           <svg
@@ -45,31 +45,33 @@ export default function Sidebar() {
       </button>
 
       <aside
-        className={`fixed lg:relative transform lg:transform-none transition-transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 top-0 left-0 w-48 bg-grey-50 shadow-xl z-50 lg:w-1/6 p-4`}
-        style={{ height: "100vh", overflowY: "auto" }} // Full height with scrolling
+        className={`fixed lg:sticky top-0 left-0 w-64 bg-white shadow-xl z-40 transition-transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
+        style={{ height: "100vh", overflowY: "auto" }}
       >
-        <div className="text-2xl font-bold text-black mb-10">Capstone</div>
-        <nav>
-          <ul className="space-y-6">
-            {navItems.map((item) => (
-              <li key={item.name}>
-                <Link href={item.path}>
-                  <div
-                    className={`flex items-center space-x-3 cursor-pointer text-lg p-4 rounded-lg transition-all duration-300 ease-in-out ${
-                      pathname === item.path
-                        ? "bg-blue-500 text-white shadow-lg"
-                        : "text-gray-400 hover:bg-gray-700 hover:text-white"
-                    }`}
-                  >
-                    <span>{item.name}</span>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="p-6">
+          <div className="text-2xl font-bold text-black mb-10">Capstone</div>
+          <nav>
+            <ul className="space-y-6">
+              {navItems.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.path}>
+                    <div
+                      className={`flex items-center space-x-3 cursor-pointer text-lg p-4 rounded-lg transition-all duration-300 ease-in-out ${
+                        pathname === item.path
+                          ? "bg-blue-500 text-white shadow-lg"
+                          : "text-gray-400 hover:bg-gray-100 hover:text-gray-900"
+                      }`}
+                    >
+                      <span>{item.name}</span>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </aside>
     </>
   );

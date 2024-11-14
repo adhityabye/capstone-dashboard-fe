@@ -16,13 +16,21 @@ export default function LayoutWrapper({ children }) {
   }, [isLoading, isAuthenticated, router]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-gray-50">
       {isAuthenticated && <Side />}
-      <div className="w-full min-h-screen p-8 bg-[#EFF2F9]">{children}</div>
+      <div className="flex-grow">
+        <div className="min-h-screen bg-[#EFF2F9]">
+          <div className="p-8">{children}</div>
+        </div>
+      </div>
     </div>
   );
 }
